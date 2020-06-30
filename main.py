@@ -1,13 +1,21 @@
 #!/bin/python3
 
 from flask import Flask, render_template
+from flask_httpauth import HTTPBasicAuth
 import flask
 import subprocess
 import os
 import glob
 app = Flask(__name__)
+auth = HTTPBasicAuth()
+
+users = {
+    "sanuki": "n.7cQ~kZaAae"
+}
+
 
 @app.route('/')
+@auth.login_required
 def index():
 	return render_template('layout.html')
 
