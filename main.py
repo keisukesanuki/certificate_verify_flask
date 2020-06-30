@@ -13,6 +13,11 @@ users = {
     "sanuki": "n.7cQ~kZaAae"
 }
 
+@auth.get_password
+def get_pw(username):
+    if username in users:
+        return users.get(username)
+    return None
 
 @app.route('/')
 @auth.login_required
