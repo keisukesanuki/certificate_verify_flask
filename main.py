@@ -18,7 +18,13 @@ def crtupload():
     # ファイルの保存
     fs = flask.request.files['certificate']
     fs.save('./upload/certificate.crt')
-    return render_template('layout.html', message="＊証明書のアップロードが完了しました")
+    
+    # 証明書が空であるか判定
+    crtsize = os.path.getsize('./upload/certificate.crt')
+    if crtsize == 0:
+      return render_template('layout.html', message="＊証明書を選択してアップロードしてください")
+    else:
+      return render_template('layout.html', message="＊証明書のアップロードが完了しました")
 
 @app.route('/privatekey-upload', methods=['POST'])
 def keyupload():
@@ -27,7 +33,13 @@ def keyupload():
     # ファイルの保存
     fs = flask.request.files['privatekey']
     fs.save('./upload/privatekey.key')
-    return render_template('layout.html', message="＊秘密鍵のアップロードが完了しました")
+    
+    # 秘密鍵が空であるか判定
+    keysize = os.path.getsize('./upload/privatekey.key')
+    if keysize == 0:
+      return render_template('layout.html', message="＊秘密鍵を選択してアップロードしてください")
+    else:
+      return render_template('layout.html', message="＊秘密鍵のアップロードが完了しました")
 
 @app.route('/ca-upload', methods=['POST'])
 def caupload():
@@ -36,7 +48,13 @@ def caupload():
     # ファイルの保存
     fs = flask.request.files['intermediate']
     fs.save('./upload/intermediate.ca')
-    return render_template('layout.html', message="＊中間証明書のアップロードが完了しました")
+
+    # 中間証明書が空であるか判定
+    casize = os.path.getsize('./upload/intermediate.ca')
+    if casize == 0:
+      return render_template('layout.html', message="＊中間証明書を選択してアップロードしてください")
+    else:
+      return render_template('layout.html', message="＊中間証明書のアップロードが完了しました")
 
 @app.route('/exec-script', methods=['POST'])
 def exec():
