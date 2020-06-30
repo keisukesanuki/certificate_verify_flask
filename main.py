@@ -66,8 +66,9 @@ def exec():
 	for crtfile in glob.glob('./upload/*'):
 		os.remove(crtfile)
 
-	return res.stdout.decode("utf8")
-	
+	#return res.stdout.decode("utf8")
+	mes = res.stdout.decode("utf8")
+	return render_template('layout.html', result=mes, restitle="実行結果")
 
 if __name__ == "__main__":
 	app.run(host='0.0.0.0')
